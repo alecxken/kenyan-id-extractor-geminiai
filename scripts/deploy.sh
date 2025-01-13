@@ -5,7 +5,7 @@ APP_DIR="/app"
 VENV_DIR="$APP_DIR/venv"
 GUNICORN_SERVICE="flaskapp"
 NGINX_CONFIG="flaskapp"
-PORT=5050
+PORT=8000
 
 # Ensure the script is run as root
 if [ "$EUID" -ne 0 ]; then
