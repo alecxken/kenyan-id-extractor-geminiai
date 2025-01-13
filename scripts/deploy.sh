@@ -4,7 +4,7 @@
 pkill gunicorn
 
 # Start Gunicorn
-cd /path/to/your/app
+cd ./app
 gunicorn --config gunicorn/gunicorn.conf.py main:app
 
 # Contents of Dockerfile

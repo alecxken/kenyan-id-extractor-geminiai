@@ -7,7 +7,7 @@ sudo mkdir -p /var/log/gunicorn
 sudo chown -R ubuntu:ubuntu /var/log/gunicorn
 
 # Install Python dependencies
-cd /path/to/your/app
+cd ./app
 pip3 install -r requirements.txt
 
 # Copy Nginx configuration
