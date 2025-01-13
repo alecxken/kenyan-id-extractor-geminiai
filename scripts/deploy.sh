@@ -8,10 +8,10 @@ NGINX_CONFIG="flaskapp"
 PORT=8000
 
 # Ensure the script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root"
-  exit
-fi
+# if [ "$EUID" -ne 0 ]; then
+#   echo "Please run as root"
+#   exit
+# fi
 
 # Update and install dependencies
 echo "Updating system and installing dependencies..."
