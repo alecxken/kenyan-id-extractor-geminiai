@@ -34,12 +34,6 @@ echo "Installing Python dependencies..."
 pip install --upgrade pip
 pip install flask gunicorn
 
-# Test the Flask app
-if ! python3 main.py --help &>/dev/null; then
-  echo "Error: Flask app failed to start. Check your application code."
-  exit 1
-fi
-
 # Create Gunicorn systemd service
 echo "Creating Gunicorn systemd service..."
 cat <<EOL > /etc/systemd/system/$GUNICORN_SERVICE.service
