@@ -1,22 +1,97 @@
-# Contents of scripts/deploy.sh
 #!/bin/bash
-# Stop existing Gunicorn process if running
-pkill gunicorn
 
-# Start Gunicorn
-cd ./app
-gunicorn --config gunicorn/gunicorn.conf.py main:app
+# Set variables
+APP_DIR="/app"
+VENV_DIR="$APP_DIR/venv"
+GUNICORN_SERVICE="flaskapp"
+NGINX_CONFIG="flaskapp"
+PORT=5050
 
-# Contents of Dockerfile
-FROM python:3.9-slim
+# Ensure the script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit
+fi
 
-WORKDIR /app
+# Update and install dependencies
+echo "Updating system and installing dependencies..."
+sudo apt update && sudo apt install -y python3 python3-venv python3-pip nginx
 
-COPY app/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Navigate to the app directory
+if [ ! -d "$APP_DIR" ]; then
+  echo "Error: Application directory $APP_DIR does not exist."
+  exit 1
+fi
+cd $APP_DIR
 
-COPY app/ .
+# Set up Python virtual environment
+echo "Setting up virtual environment..."
+python3 -m venv $VENV_DIR
+source $VENV_DIR/bin/activate
 
-EXPOSE 8000
+# Install Python dependencies
+echo "Installing Python dependencies..."
+pip install --upgrade pip
+pip install flask gunicorn
 
-CMD ["gunicorn", "--config", "gunicorn/gunicorn.conf.py", "main:app"]
+# Test the Flask app
+if ! python3 main.py --help &>/dev/null; then
+  echo "Error: Flask app failed to start. Check your application code."
+  exit 1
+fi
+
+# Create Gunicorn systemd service
+echo "Creating Gunicorn systemd service..."
+cat <<EOL > /etc/systemd/system/$GUNICORN_SERVICE.service
+[Unit]
+Description=Gunicorn instance to serve Flask app
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=$APP_DIR
+Environment="PATH=$VENV_DIR/bin"
+ExecStart=$VENV_DIR/bin/gunicorn --workers 3 --bind unix:$APP_DIR/$GUNICORN_SERVICE.sock main:app
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+# Start and enable Gunicorn service
+echo "Starting and enabling Gunicorn service..."
+systemctl start $GUNICORN_SERVICE
+systemctl enable $GUNICORN_SERVICE
+
+# Create Nginx configuration
+echo "Configuring Nginx..."
+cat <<EOL > /etc/nginx/sites-available/$NGINX_CONFIG
+server {
+    listen $PORT;
+    server_name _;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:$APP_DIR/$GUNICORN_SERVICE.sock;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}
+EOL
+
+# Enable Nginx configuration
+echo "Enabling Nginx configuration..."
+ln -sf /etc/nginx/sites-available/$NGINX_CONFIG /etc/nginx/sites-enabled
+nginx -t && systemctl restart nginx
+
+# Adjust firewall
+if command -v ufw &>/dev/null; then
+  echo "Allowing traffic on port $PORT..."
+  ufw allow $PORT
+fi
+
+# Print success message
+echo "Deployment completed successfully! Visit http://<your-server-ip>:$PORT to view your app."
