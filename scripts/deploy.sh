@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set variables
-APP_DIR="/app"
+APP_DIR="./app"
 VENV_DIR="$APP_DIR/venv"
 GUNICORN_SERVICE="flaskapp"
 NGINX_CONFIG="flaskapp"
