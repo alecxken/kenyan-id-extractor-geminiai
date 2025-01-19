@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance to serve Flask app
+After=network.target
+
+[Service]
+User=alecxkendagor
+Group=www-data
+WorkingDirectory=/home/alecxkendagor/kenyan-id-extractor-geminiai
+ExecStart=/usr/bin/python3 /home/alecxkendagor/.local/bin/gunicorn --workers 3 --bind unix:/home/alecxkendagor/kenyan-id-extractor-geminiai/flaskapp.sock main:app
+
+[Install]
+WantedBy=multi-user.target
