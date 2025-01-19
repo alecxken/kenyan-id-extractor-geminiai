@@ -9,6 +9,12 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
+@app.route('/', methods=['GET'])
+def health_check():
+    """
+    Health check endpoint to verify the app is running.
+    """
+    return jsonify({'status': 'running', 'message': 'Flask app is healthy'}), 200
 
 @app.route('/set_api_key', methods=['POST'])
 def set_api_key():
