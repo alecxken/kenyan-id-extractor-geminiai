@@ -1,0 +1,39 @@
+2025-01-30 20:12:10,380 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:9000
+ * Running on http://192.168.8.111:9000
+2025-01-30 20:12:10,381 - INFO - [33mPress CTRL+C to quit[0m
+2025-01-30 20:12:17,517 - INFO - API key updated successfully
+2025-01-30 20:12:17,518 - INFO - 127.0.0.1 - - [30/Jan/2025 20:12:17] "POST /set_api_key HTTP/1.1" 200 -
+2025-01-30 20:12:20,983 - INFO - 127.0.0.1 - - [30/Jan/2025 20:12:20] "[31m[1mPOST /process_image HTTP/1.1[0m" 400 -
+2025-01-30 20:12:26,760 - INFO - API key updated successfully
+2025-01-30 20:12:26,760 - INFO - 127.0.0.1 - - [30/Jan/2025 20:12:26] "POST /set_api_key HTTP/1.1" 200 -
+2025-01-30 20:12:29,117 - INFO - 127.0.0.1 - - [30/Jan/2025 20:12:29] "[31m[1mPOST /process_image HTTP/1.1[0m" 400 -
+2025-01-30 20:13:32,674 - INFO - API key loaded successfully
+2025-01-30 20:13:32,678 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:9000
+ * Running on http://192.168.8.111:9000
+2025-01-30 20:13:32,678 - INFO - [33mPress CTRL+C to quit[0m
+2025-01-30 20:13:38,965 - INFO - API key updated and configured successfully
+2025-01-30 20:13:38,966 - INFO - 127.0.0.1 - - [30/Jan/2025 20:13:38] "POST /set_api_key HTTP/1.1" 200 -
+2025-01-30 20:13:46,850 - INFO - 127.0.0.1 - - [30/Jan/2025 20:13:46] "POST /process_image HTTP/1.1" 200 -
+2025-01-30 20:13:54,837 - INFO - 127.0.0.1 - - [30/Jan/2025 20:13:54] "POST /process_image HTTP/1.1" 200 -
+2025-01-30 20:14:11,834 - INFO - 127.0.0.1 - - [30/Jan/2025 20:14:11] "POST /process_image HTTP/1.1" 200 -
+2025-01-30 20:20:54,720 - INFO - API key loaded successfully
+2025-01-30 20:20:54,724 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:9000
+ * Running on http://192.168.8.111:9000
+2025-01-30 20:20:54,724 - INFO - [33mPress CTRL+C to quit[0m
+2025-01-30 20:21:15,681 - INFO - 127.0.0.1 - - [30/Jan/2025 20:21:15] "POST /process_image HTTP/1.1" 200 -
+2025-01-30 20:21:17,155 - INFO - API key updated and configured successfully
+2025-01-30 20:21:17,156 - INFO - 127.0.0.1 - - [30/Jan/2025 20:21:17] "POST /set_api_key HTTP/1.1" 200 -
+2025-01-30 20:21:25,579 - INFO - 127.0.0.1 - - [30/Jan/2025 20:21:25] "POST /process_image HTTP/1.1" 200 -
+2025-01-31 06:00:48,555 - INFO - API key loaded successfully
+2025-01-31 06:00:48,745 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:9000
+ * Running on http://192.168.100.4:9000
+2025-01-31 06:00:48,746 - INFO - [33mPress CTRL+C to quit[0m
+2025-01-31 06:01:07,382 - INFO - 127.0.0.1 - - [31/Jan/2025 06:01:07] "POST /process_image HTTP/1.1" 200 -
